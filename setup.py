@@ -18,7 +18,7 @@ setup(
     long_description = long_description,
 
     install_requires = ['Anthrax>=0.0.1', 'Mako>=0.6.2'],
-    tests_require = ['nose>=1.0', 'nose-cov>=1.0', 'lxml'],
+    tests_require = ['nose>=1.0', 'nose-cov>=1.0', 'lxml', 'AnthraxHTMLInput'],
     test_suite = 'nose.collector',
     package_dir = {'': 'src'},
     namespace_packages = ['anthrax'],

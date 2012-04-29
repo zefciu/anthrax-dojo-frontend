@@ -4,6 +4,7 @@ from lxml.html import assertHTMLEqual
 
 from anthrax.container import Form, Container
 import anthrax.field as f
+from anthrax.html_input.field import HtmlField
 
 
 class Test(unittest.TestCase):
@@ -27,7 +28,8 @@ class Test(unittest.TestCase):
                     max_len=20, max_len_message='You must be kidding!',
                 )
                 nickname = f.TextField(label='Nickname', max_len=30)
-            age = f.IntegerField(label='Age', min=7, max=99)
+                age = f.IntegerField(label='Age', min=7, max=99)
+                long_description = HtmlField(label='Long description')
         self.form = TestForm()
 
     def test_render(self):
@@ -52,13 +54,18 @@ class Test(unittest.TestCase):
             data-dojo-props="constraints: {min: 7, max: 99}"
             name="age" /></td>
             <td></td>
+        </tr><tr>
+            <td>Long description</td>
+            <td><input data-dojo-type="dijit.Editor"
+            name="long_description" /></td>
+            <td></td>
         </tr>
     </tbody>
     </table>
 
 </form>
 <script type="text/javascript">
-    require(['anthrax/AnthraxTextBox', 'dijit/form/NumberSpinner']);
+    require(['anthrax/AnthraxTextBox', 'dijit/Editor', 'dijit/form/NumberSpinner']);
 </script>
 """)
 
