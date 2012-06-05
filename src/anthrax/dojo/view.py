@@ -25,10 +25,11 @@ class SimpleDojoView():
         )
 
 anthrax_text_box_view = SimpleDojoView(
-    'anthrax/AnthraxTextBox', 'anthrax_text_box.mako'
+    'anthrax/js/AnthraxTextBox', 'anthrax_text_box.mako'
 )
 spinner_view = SimpleDojoView('dijit/form/NumberSpinner', 'spinner.mako')
 editor = SimpleDojoView('dijit/Editor', 'editor.mako')
+hidden = SimpleDojoView(None, 'hidden.mako')
 
 def html_tabular_form_view(form):
     return LOOKUP.get_template('tabular_form.mako').render(
