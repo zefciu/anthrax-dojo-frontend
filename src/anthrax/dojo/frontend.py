@@ -6,4 +6,5 @@ dojo_frontend = Frontend({
     'hidden': v.hidden,
     'spinner': v.spinner_view,
     'wysiwyg_editor': v.editor,
+    'button': v.button,
 }, v.html_tabular_form_view)

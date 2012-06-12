@@ -29,7 +29,8 @@ class Test(unittest.TestCase):
                 )
                 nickname = f.TextField(label='Nickname', max_len=30)
                 age = f.IntegerField(label='Age', min=7, max=99)
-                long_description = HtmlField(label='Long description')
+                long_description = HtmlField(id='wysiwyg',
+                    label='Long description')
         self.form = TestForm()
 
     def test_render(self):
@@ -56,8 +57,11 @@ class Test(unittest.TestCase):
             <td></td>
         </tr><tr>
             <td>Long description</td>
-            <td><input data-dojo-type="dijit.Editor"
-            name="long_description" /></td>
+            <td><input id="wysiwyg-value" name="long_description" type="hidden" />
+            <div data-dojo-type="dijit.Editor"
+            onchange="dojo.byId('wysiwyg-value').value = this.getValue();">
+            </div>
+            </td>
             <td></td>
         </tr>
     </tbody>
@@ -65,7 +69,7 @@ class Test(unittest.TestCase):
 
 </form>
 <script type="text/javascript">
-    require(['anthrax/AnthraxTextBox', 'dijit/Editor', 'dijit/form/NumberSpinner']);
+    require(['anthrax/js/AnthraxTextBox', 'dijit/Editor', 'dijit/form/Form', 'dijit/form/NumberSpinner', 'dojo/domReady', 'dojo/parser']);
 </script>
 """)
 

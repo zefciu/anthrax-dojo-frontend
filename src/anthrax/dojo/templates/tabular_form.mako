@@ -6,7 +6,7 @@
     % else:
     <tr>
     <%
-require, rendering = field.render()
+require, rendering = field.render(form=form)
 if require:
     requirements.add(require)
 endif
@@ -19,7 +19,14 @@ endif
 % endfor
 </%def>
 
-<form>
+<form\
+   % if 'action' in form.kwargs:
+   action = "${form.kwargs['action']}"
+   % endif
+   % if 'method' in form.kwargs:
+   method = "${form.kwargs['method']}"
+   % endif
+>
     <table>
     <tbody>
     ${render_tabular(form)}
