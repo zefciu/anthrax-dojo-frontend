@@ -1,5 +1,5 @@
 <input name="${field.name}"\
-% if value:
+% if field.raw_value:
 value="${field.raw_value}"
 % endif
 data-dojo-type="dijit.form.NumberSpinner"

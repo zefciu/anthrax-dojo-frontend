@@ -2,7 +2,7 @@
 <div onChange="dojo.byId('${field.id}-value').value = this.getValue();"
 data-dojo-type="dijit.Editor"
 >
-% if value:
+% if field.raw_value:
 ${field.raw_value}
 % endif
 </div>
