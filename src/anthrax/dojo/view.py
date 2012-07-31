@@ -30,6 +30,7 @@ anthrax_text_box_view = SimpleDojoView(
 spinner_view = SimpleDojoView('dijit/form/NumberSpinner', 'spinner.mako')
 editor = SimpleDojoView('dijit/Editor', 'editor.mako')
 hidden = SimpleDojoView(None, 'hidden.mako')
+datebox = SimpleDojoView('anthrax/js/AnthraxDateBox', 'anthrax_datebox.mako')
 button = SimpleDojoView('dijit/form/Button', 'button.mako')
 
 def html_tabular_form_view(form):

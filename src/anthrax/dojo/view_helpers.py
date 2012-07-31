@@ -1,5 +1,12 @@
 from anthrax.container import Container
 
+PATTERN_EQUIVALENTS = [
+    ('%d', 'dd'),
+    ('%m', 'MM'),
+    ('%Y', 'yyyy'),
+]
+
+
 def is_container(item):
     return isinstance(item, Container)
 
@@ -35,3 +42,14 @@ def render_textbox_constraints(field):
         ))
     return ', '.join(result)
 
+def _date_pattern2dojo(pattern):
+    for py_symbol, dojo_symbol in PATTERN_EQUIVALENTS:
+        pattern = pattern.replace(py_symbol, dojo_symbol)
+    return pattern
+
+def render_date_box_constraints(field):
+    result = []
+    result.append(
+        "datePattern: '{0}'".format(_date_pattern2dojo(field.date_format))
+    )
+    return ', '.join(result)
