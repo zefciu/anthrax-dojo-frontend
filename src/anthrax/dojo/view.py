@@ -13,19 +13,24 @@ LOOKUP = mako.lookup.TemplateLookup(directories=[
 class SimpleDojoView():
     lookup = LOOKUP
 
-    def __init__(self, require, template_name):
+    def __init__(self, require, template_name, **kwargs):
         self.require = require
         self.template_name = template_name
+        self.kwargs = kwargs
 
     def __call__(self, **kwargs):
         kwargs['h'] = view_helpers
+        kwargs.update(self.kwargs)
         return (
             self.require,
             self.lookup.get_template(self.template_name).render(**kwargs)
         )
 
 anthrax_text_box_view = SimpleDojoView(
-    'anthrax/js/AnthraxTextBox', 'anthrax_text_box.mako'
+    'anthrax/js/AnthraxTextBox', 'anthrax_text_box.mako', input_type='text'
+)
+anthrax_password_box_view = SimpleDojoView(
+    'anthrax/js/AnthraxTextBox', 'anthrax_text_box.mako', input_type='password'
 )
 spinner_view = SimpleDojoView('dijit/form/NumberSpinner', 'spinner.mako')
 editor = SimpleDojoView('dijit/Editor', 'editor.mako')

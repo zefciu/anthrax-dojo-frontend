@@ -6,6 +6,10 @@ PATTERN_EQUIVALENTS = [
     ('%Y', 'yyyy'),
 ]
 
+def escape_to_single_quote(value):
+    """Escapes the given string to be displayed in js single quotes.
+    TODO: escaping all possible stuff."""
+    return value.replace("'", r"\'")
 
 def is_container(item):
     return isinstance(item, Container)
@@ -24,19 +28,23 @@ def render_spinner_constraints(field):
 def render_textbox_constraints(field):
     result = []
     if field.regexp is not None:
-        result.append('regexp: /{0}/'.format(field.regexp))
-        result.append("invalidMessage: '{0}'".format(field.regexp_message))
+        result.append("regExp: '{0}'".format(
+            escape_to_single_quote(field.regexp))
+        )
+        result.append("invalidMessage: '{0}'".format(
+            escape_to_single_quote(field.regexp_message)
+        ))
     if field.min_len is not None:
         result.append('minLen: ' + str(field.min_len))
         result.append("minLenMessage: '{0}'".format(
-            field.min_len_message.replace("'", r"\'")
+            escape_to_single_quote(field.min_len_message)
         ).format(
             min_len=field.min_len
         ))
     if field.max_len is not None:
         result.append('maxLen: ' + str(field.max_len))
         result.append("maxLenMessage: '{0}'".format(
-            field.max_len_message.replace("'", r"\'")
+            escape_to_single_quote(field.max_len_message)
         ).format(
             max_len=field.max_len
         ))
