@@ -3,6 +3,7 @@ from anthrax.dojo import view as v
 
 dojo_frontend = Frontend({
     'text_input': v.anthrax_text_box_view,
+    'long_text_input': v.textarea,
     'password_input': v.anthrax_password_box_view,
     'hidden': v.hidden,
     'spinner': v.spinner_view,

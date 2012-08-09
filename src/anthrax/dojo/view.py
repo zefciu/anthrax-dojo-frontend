@@ -32,6 +32,7 @@ anthrax_text_box_view = SimpleDojoView(
 anthrax_password_box_view = SimpleDojoView(
     'anthrax/js/AnthraxTextBox', 'anthrax_text_box.mako', input_type='password'
 )
+textarea = SimpleDojoView('dijit/form/Textarea', 'textarea.mako')
 spinner_view = SimpleDojoView('dijit/form/NumberSpinner', 'spinner.mako')
 editor = SimpleDojoView('dijit/Editor', 'editor.mako')
 hidden = SimpleDojoView(None, 'hidden.mako')
