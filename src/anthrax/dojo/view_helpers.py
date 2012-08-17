@@ -25,7 +25,7 @@ def render_spinner_constraints(field):
         result.append('max: ' + str(field.max))
     return ', '.join(result)
 
-def render_textbox_constraints(field):
+def render_textbox_constraints(field, form):
     result = []
     if field.regexp is not None:
         result.append("regExp: '{0}'".format(
@@ -48,6 +48,9 @@ def render_textbox_constraints(field):
         ).format(
             max_len=field.max_len
         ))
+    error = form.__errors__[field.name]
+    if error is not None:
+        result.append("initialError: '{0}'".format(error.message))
     return ', '.join(result)
 
 def _date_pattern2dojo(pattern):

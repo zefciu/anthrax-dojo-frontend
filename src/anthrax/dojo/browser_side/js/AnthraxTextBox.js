@@ -6,8 +6,14 @@ define([
             maxLen: null,
             minLenMessage: '$_unset_$',
             maxLenMessage: '$_unset_$',
+            initialError: null,
             validate: function (isFocused) {
                 var tooShort, isValid = false;
+                if (this.initialError) {
+                    this._set('state', 'Error');
+                    this.set('message', this.initialError);
+                    return false;
+                }
                 if (
                     this.maxLen !== null && 
                     this.textbox.value.length > this.maxLen
@@ -33,7 +39,11 @@ define([
                     this._set('state', 'Incomplete');
                 }
                 return isValid;
-            } 
+            },
+            onInput: function () {
+                this.inherited(arguments);
+                this.initialError = null;
+            }
         });
     }
 );

@@ -20,6 +20,7 @@ endif
 </%def>
 
 <form\
+   data-dojo-type='dijit.form.Form'
    % if 'action' in form.kwargs:
    action = "${form.kwargs['action']}"
    % endif
