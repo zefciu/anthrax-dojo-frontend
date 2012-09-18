@@ -9,5 +9,6 @@ dojo_frontend = Frontend({
     'spinner': v.spinner_view,
     'wysiwyg_editor': v.editor,
     'date_picker': v.datebox,
+    'file_upload': v.file_upload,
     'button': v.button,
 }, v.html_tabular_form_view)

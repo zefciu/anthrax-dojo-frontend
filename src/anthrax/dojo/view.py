@@ -38,6 +38,7 @@ editor = SimpleDojoView('dijit/Editor', 'editor.mako')
 hidden = SimpleDojoView(None, 'hidden.mako')
 datebox = SimpleDojoView('anthrax/js/AnthraxDateBox', 'anthrax_datebox.mako')
 button = SimpleDojoView('dijit/form/Button', 'button.mako')
+file_upload = SimpleDojoView('dojox/form/Uploader', 'file_upload.mako')
 
 def html_tabular_form_view(form):
     return LOOKUP.get_template('tabular_form.mako').render(

@@ -27,6 +27,9 @@ endif
    % if 'method' in form.kwargs:
    method = "${form.kwargs['method']}"
    % endif
+   % if form.has_uploads():
+   enctype="multipart/form-data"
+   % endif
 >
     <table>
     <tbody>
