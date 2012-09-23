@@ -19,7 +19,7 @@ endif
 % endfor
 </%def>
 
-<form\
+<div\
    data-dojo-type='dijit.form.Form'
    % if 'action' in form.kwargs:
    action = "${form.kwargs['action']}"
@@ -31,18 +31,34 @@ endif
    enctype="multipart/form-data"
    % endif
    id="${form.id}"
+   data-dojo-props="id: '${form.id}'"
 >
     <table>
     <tbody>
     ${render_tabular(form)}
     </tbody>
     </table>
-</form>
+</div>
 <script type="text/javascript">
     require([${h.render_requirements(requirements)}]
     % if form.kwargs.get('do_parsing', False):
     , function () {
-        dojo.parser.parse(dojo.byId('${form.id}'));
+        dojo.parser.parse(dojo.byId('${form.id}').parentElement);
+    % if form.kwargs.get('ajax_submit', None):
+        require(['dojo/request/xhr', 'dojo/dom-form'],
+            function (xhr, domForm) {
+                dijit.registry.byId('${form.id}').onSubmit = function (ev) {
+                    dojo.stopEvent(ev);
+                    if (!this.validate()) {
+                        return;
+                    }
+                    xhr(
+                        this.action,
+                        {data: domForm.toObject(this.id), method: 'POST'}
+                    ).then(${form.kwargs['ajax_submit']});
+                };
+        });
+    % endif
     }
     % endif
     );
