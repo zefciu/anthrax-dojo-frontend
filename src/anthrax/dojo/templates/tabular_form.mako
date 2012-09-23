@@ -30,6 +30,7 @@ endif
    % if form.has_uploads():
    enctype="multipart/form-data"
    % endif
+   id="${form.id}"
 >
     <table>
     <tbody>
@@ -38,5 +39,11 @@ endif
     </table>
 </form>
 <script type="text/javascript">
-    require([${h.render_requirements(requirements)}]);
+    require([${h.render_requirements(requirements)}]
+    % if form.kwargs.get('do_parsing', False):
+    , function () {
+        dojo.parser.parse(dojo.byId('${form.id}'));
+    }
+    % endif
+    );
 </script>
