@@ -28,9 +28,7 @@ def render_spinner_constraints(field):
 def render_textbox_constraints(field, form):
     result = []
     if field.regexp is not None:
-        result.append("regExp: '{0}'".format(
-            escape_to_single_quote(field.regexp))
-        )
+        result.append("regExp: /{0}/".format(field.regexp))
         result.append("invalidMessage: '{0}'".format(
             escape_to_single_quote(field.regexp_message)
         ))

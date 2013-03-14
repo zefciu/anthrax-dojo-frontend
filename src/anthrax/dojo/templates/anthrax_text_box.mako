@@ -9,5 +9,4 @@ data-dojo-type="anthrax.AnthraxTextBox"
 % if constraints:
 data-dojo-props="${constraints}"
 % endif
->
-</input>
+/>

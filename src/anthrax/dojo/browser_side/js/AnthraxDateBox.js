@@ -11,7 +11,7 @@ define([
                 };
             },
 
-            beforeMixinProperties: function() {
+            postMixInProperties: function() {
                 this.inherited(arguments)
                 this.value = locale.parse(this.value, this._getFormat());
             },

@@ -34,19 +34,23 @@ class Test(unittest.TestCase):
         self.form = TestForm()
 
     def test_render(self):
-        assertHTMLEqual(self.form.render(), r"""<form>
+        print(self.form.render())
+        assertHTMLEqual(self.form.render(), r"""<div any="">
     <table>
     <tbody>
         <tr>
             <td>Name</td>
             <td><input data-dojo-type="anthrax.AnthraxTextBox" name="name" 
-            data-dojo-props="regexp: /^[A-Z][a-z]+$/, invalidMessage: 'Write your name with a capital', maxLen: 20, maxLenMessage: 'You must be kidding!'" />
+            data-dojo-props="regExp: /^[A-Z][a-z]+$/, invalidMessage: 'Write your name with a capital', maxLen: 20, maxLenMessage: 'You must be kidding!'"
+            id="..." type="text"/>
             </td>
             <td></td>
         </tr><tr>
             <td>Nickname</td>
             <td><input data-dojo-type="anthrax.AnthraxTextBox" name="nickname" 
-            data-dojo-props="maxLen: 30, maxLenMessage: 'Value can\'t be longer than 30'" />
+            data-dojo-props="maxLen: 30, maxLenMessage: 'Value can\'t be longer than 30'" 
+            id="...." type="text"
+            />
             </td>
             <td></td>
         </tr><tr>
@@ -67,9 +71,9 @@ class Test(unittest.TestCase):
     </tbody>
     </table>
 
-</form>
+</div>
 <script type="text/javascript">
     require(['anthrax/js/AnthraxTextBox', 'dijit/Editor', 'dijit/form/Form', 'dijit/form/NumberSpinner', 'dojo/domReady', 'dojo/parser']);
 </script>
-""")
+""", ellipses=True)
 

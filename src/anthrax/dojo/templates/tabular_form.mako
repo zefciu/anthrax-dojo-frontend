@@ -40,7 +40,7 @@ endif
     </table>
 </div>
 <script type="text/javascript">
-    require([${h.render_requirements(requirements)}]
+    require([${h.render_requirements(requirements)}]\
     % if form.kwargs.get('do_parsing', False):
     , function () {
         dojo.parser.parse(dojo.byId('${form.id}').parentElement);
@@ -59,7 +59,22 @@ endif
                 };
         });
     % endif
+    % if form.kwargs.get('iframe_submit', None):
+        require(['dojo/request/iframe', 'dojo/dom-form'],
+            function (iframe, domForm) {
+                dijit.registry.byId('${form.id}').onSubmit = function (ev) {
+                    dojo.stopEvent(ev);
+                    if (!this.validate()) {
+                        return;
+                    }
+                    iframe(
+                        this.action,
+                        {form: this.id, method: 'POST'}
+                    ).then(${form.kwargs['iframe_submit']});
+                };
+        });
+    % endif
     }
     % endif
-    );
+);
 </script>
