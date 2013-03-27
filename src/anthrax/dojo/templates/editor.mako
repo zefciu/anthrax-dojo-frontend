@@ -6,3 +6,11 @@ data-dojo-type="dijit.Editor"
 ${field.raw_value}
 % endif
 </div>
+<script type="text/javascript">
+require(['dojo/dom-attr'], function (domAttr) {
+    console.log(dojo.byId('zijwcnldzgoyhwqo-value'));
+    domAttr.set(dojo.byId('zijwcnldzgoyhwqo-value'), 'value',
+        '${field.raw_value}');
+});
+</script>
+
