@@ -8,8 +8,7 @@ ${field.raw_value}
 </div>
 <script type="text/javascript">
 require(['dojo/dom-attr'], function (domAttr) {
-    console.log(dojo.byId('zijwcnldzgoyhwqo-value'));
-    domAttr.set(dojo.byId('zijwcnldzgoyhwqo-value'), 'value',
+    domAttr.set(dojo.byId('${field.id}-value'), 'value',
         '${field.raw_value}');
 });
 </script>
