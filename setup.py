@@ -22,6 +22,7 @@ setup(
     test_suite = 'nose.collector',
     package_dir = {'': 'src'},
     namespace_packages = ['anthrax'],
+    include_package_data = True,
     packages = [
         'anthrax', 'anthrax.dojo',
     ],

@@ -2,3 +2,4 @@
 __pycache__
 *.swp
 src/AnthraxDojoFrontend.egg-info
+dist/
