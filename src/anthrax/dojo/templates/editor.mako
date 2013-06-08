@@ -4,7 +4,7 @@
 % endif
 <input type="hidden" name="${field.name}" id="${field.id}-value" />
 <div id="${field.id}-editor" onChange="dojo.byId('${field.id}-value').value = this.getValue();"
-data-dojo-type="dijit.Editor"
+data-dojo-type="dijit.Editor" data-dojo-props="extraPlugins:['fontSize', 'formatBlock', 'viewsource']"
 >
 % if field.raw_value:
 ${field.raw_value}

@@ -8,7 +8,9 @@
     <%
 require, rendering = field.render(form=form)
 if require:
-    requirements.add(require)
+    if not isinstance(require, list):
+        require = [require]
+    requirements.update(require)
 endif
     %>
     <td>${field.label}</td>
