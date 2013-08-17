@@ -1,4 +1,4 @@
-<% requirements = set(['dijit/form/Form', 'dojo/parser', 'dojo/domReady']) %>
+<% requirements = set([]) %>
 <%def name="render_tabular(container)">
 % for fname, field in container.__fields__.items():
     % if h.is_container(field):
@@ -43,40 +43,39 @@ endif
 </div>
 <script type="text/javascript">
     require([${h.render_requirements(requirements)}]\
+    , function (parser, dom) {
     % if form.kwargs.get('do_parsing', False):
-    , function () {
-        dojo.parser.parse(dojo.byId('${form.id}').parentElement);
+        parser.parse(dom.byId('${form.id}').parentElement);
+    % endif;
     % if form.kwargs.get('ajax_submit', None):
-        require(['dojo/request/xhr', 'dojo/dom-form'],
-            function (xhr, domForm) {
-                dijit.registry.byId('${form.id}').onSubmit = function (ev) {
-                    dojo.stopEvent(ev);
-                    if (!this.validate()) {
-                        return;
-                    }
-                    xhr(
-                        this.action,
-                        {data: domForm.toObject(this.id), method: 'POST'}
-                    ).then(${form.kwargs['ajax_submit']});
-                };
-        });
+         require(['dojo/request/xhr', 'dojo/dom-form'],
+             function (xhr, domForm) {
+                 dijit.registry.byId('${form.id}').onSubmit = function (ev) {
+                     dojo.stopEvent(ev);
+                     if (!this.validate()) {
+                         return;
+                     }
+                     xhr(
+                         this.action,
+                         {data: domForm.toObject(this.id), method: 'POST'}
+                     ).then(${form.kwargs['ajax_submit']});
+                 };
+         });
+  % endif
+  % if form.kwargs.get('iframe_submit', None):
+         require(['dojo/request/iframe', 'dojo/dom-form'],
+             function (iframe, domForm) {
+                 dijit.registry.byId('${form.id}').onSubmit = function (ev) {
+                     dojo.stopEvent(ev);
+                     if (!this.validate()) {
+                         return;
+                     }
+                     iframe(
+                         this.action,
+                         {form: this.id, method: 'POST', handleAs: 'text'}
+                     ).then(${form.kwargs['iframe_submit']});
+                 };
+         });
     % endif
-    % if form.kwargs.get('iframe_submit', None):
-        require(['dojo/request/iframe', 'dojo/dom-form'],
-            function (iframe, domForm) {
-                dijit.registry.byId('${form.id}').onSubmit = function (ev) {
-                    dojo.stopEvent(ev);
-                    if (!this.validate()) {
-                        return;
-                    }
-                    iframe(
-                        this.action,
-                        {form: this.id, method: 'POST'}
-                    ).then(${form.kwargs['iframe_submit']});
-                };
-        });
-    % endif
-    }
-    % endif
-);
+    });
 </script>

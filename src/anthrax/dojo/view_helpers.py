@@ -15,7 +15,9 @@ def is_container(item):
     return isinstance(item, Container)
 
 def render_requirements(requirements):
-    return ', '.join(sorted(("'{0}'".format(req) for req in requirements)))
+    reqs = sorted(requirements)
+    reqs = ['dojo/parser', 'dojo/dom', 'dijit/form/Form'] + reqs + ['dojo/domReady!']
+    return ', '.join(("'{0}'".format(req) for req in reqs))
 
 def render_spinner_constraints(field):
     result = []
