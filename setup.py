@@ -9,7 +9,7 @@ with open('entry_points.ini') as f:
 
 setup(
     name = 'AnthraxDojoFrontend',
-    version = '0.0.6',
+    version = '0.0.7',
     author = 'Szymon Pyżalski',
     author_email = 'zefciu <szymon@pythonista.net>',
     description = 'Anthrax frontend for using dojo toolkit',
